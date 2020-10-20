@@ -1,0 +1,366 @@
+@import 'reset';
+@import 'mixin';
+
+$color-primary:#59c6d5;
+$color-secondary: #98a8e4;
+$color-dark: #3e3e3e;
+$color-light: #cccccc;
+$color-black: #000000;
+$color-white: #ffffff;
+
+body {
+  font-family: 'Noto Sans', 'PT Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 300;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+// button //
+.btn {
+  width: 200px;
+  height: 64px;
+  border: none;
+  cursor: pointer;
+  background-color: $color-primary;
+  color: $color-white;
+  font-size: 1.2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .3s;
+
+  .material-icons {
+    margin-left: 4px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: darken($color-primary, 10%);
+  }
+
+}
+
+.btn-small {
+  width: 64px;
+
+  .material-icons {
+    margin-left: 96px;
+  }
+}
+
+.btn-long {
+  width: 100%;
+  justify-content: flex-end;
+  padding-right: 64px;
+}
+
+// index首頁 //
+
+.index {
+  
+  .image {
+    margin: 0 auto;
+    width: 100%;
+    height: 250px;
+    background: url(../img/001.jpg) 0px -40px no-repeat;
+    background-size: 100%;
+  }
+
+  .text{
+    padding: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include media-768 {
+      padding: 64px 32px;
+      align-items: center;
+    }
+
+    .title {
+      width: 320px;
+      margin-bottom: 64px;
+      @include media-768 {
+        width: auto;
+        margin-bottom: 32px;
+        text-align: center;
+      }
+      span {
+        color: $color-primary;
+        display: inline-block;
+        font-size: 1.5rem;
+      }
+      h1 {
+        color: $color-dark;
+        font-size: 3rem;
+        @include media-768 {
+          font-size: 2rem;
+        }
+      }
+    }
+    .description {
+      align-self: flex-end;
+      display: flex;
+      align-items: center;
+
+      @include media-768 {
+        flex-direction: column;
+        align-self: center;
+      }
+
+      p {
+        width: 400px;
+        color: $color-dark;
+        margin-right: 32px;
+        @include media-768 {
+          width: auto;
+          margin: 0 0 32px 0;
+        }
+      }
+    }
+  }
+}
+
+// 問題內頁 //
+
+.container.question {
+  flex-direction: row;
+  @include media-768 {
+    flex-direction: column;
+  }
+}
+
+.question {
+  .col {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @include media-768 {
+      width: 100%;
+    }
+  }
+
+  .col_question {
+    background-color: lighten($color-primary, 25%);
+    @include media-768 {
+      position: relative;
+    }
+  }
+
+  .questions_title {
+    padding: 64px;
+    @include media-768 {
+      padding: 32px;
+    }
+    span {
+      display: inline-block;
+      padding-bottom: 20px;
+      font-size: 4rem;
+      font-style: italic;
+      @include media-768 {
+        font-size: 3rem;
+      }
+    }
+    h2 {
+      padding-left: 40px;
+      font-size: 1.5rem;
+      @include media-768 {
+        font-size: 1rem;
+        padding-left: 20px;
+        margin-bottom: 32px;
+      }
+    }
+    
+  }
+
+  .side_title {
+    padding: 0 0 64px 64px;
+    color: $color-primary;
+
+    span {
+      display: block;
+    }
+
+    @include media-768 {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      font-size: 0.5rem;
+    }
+
+  }
+
+  .col_answer {
+    align-items: flex-end;
+
+    .pages {
+      color: $color-dark;
+      font-style: italic;
+      font-size: 1.2rem;
+      padding: 64px;
+
+      @include media-768 {
+        padding: 32px;
+      }
+    }
+
+    .answers {
+      height: auto;
+      align-self: flex-start;
+      padding: 0 74px 32px;
+
+      .answer {
+        padding: 5px 0;
+        line-height: 1.5rem;
+        position: relative;
+      }
+
+
+      input[type="radio"] {
+
+        appearance: none;
+        outline: none;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: $color-light;
+        position: absolute;
+        top: 5px;
+        left: -30px;
+        cursor: pointer;
+
+      }
+
+      li:hover input {
+        background-color: $color-primary;
+      }
+
+      li:hover label {
+        color: $color-primary;
+        cursor: pointer;
+      }
+
+      input[type="radio"]:checked {
+        background-color: $color-white;
+        border: 5px solid $color-primary;
+
+        &~label {
+          color: $color-primary;
+        }
+      }
+
+
+
+
+    }
+
+  }
+}
+
+
+// 結果頁 //
+
+
+.result{
+
+  .side_title{
+    color: $color-white;
+    margin: 64px;
+    span{
+      display: block;
+    }
+  }
+
+  .trait_items{
+    font-size: 0;
+    background-color: $color-primary;
+    padding-left: 64px;
+    @include media-768 {
+      padding-left: 0;
+      text-align: center;
+    }
+
+    li {
+      display: inline-block;
+      font-size: 1rem;
+      line-height: 64px;
+      
+      a {
+        display: block;
+        padding: 0 32px;
+        color: $color-white;
+        font-weight: 600;
+        text-decoration: none;
+    
+        &:hover{
+          background-color: darken($color-primary, 10%);
+        }
+        
+        &.active {
+          background-color: darken($color-primary, 10%);
+        }
+      }
+    }
+  }
+
+  .trait{
+    display: flex;
+    @include media-768 {
+      flex-direction: column;
+    }
+    .trait_type{
+      width: 50%;
+      padding: 64px;
+      @include media-768 {
+        width: 100%;
+        padding: 32px;
+      }
+      h3{
+        font-size: 2rem;
+        margin-bottom: 32px;
+      }
+      span{
+        display: block;
+      }
+    }
+
+    .result_description{
+       padding: 64px;
+       width: 50%;
+       display: flex;
+       flex-direction: column;
+       @include media-768 {
+         width: 100%;
+         padding: 32px;
+       }
+       span{
+         display: block;
+         font-size: 2rem;
+         font-weight: 500;
+         margin-bottom: 64px;
+
+       }
+       p{
+         margin-bottom: 64px;
+       }
+       .btn{
+         align-self: flex-end;
+    }
+  }
+}
+}

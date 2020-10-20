@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Big Five personality traits test</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&family=PT+Sans:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="style/all.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <div class="app" id="app">
+    <div class="container index" v-if="pageIndex === -1">
+      <div class="image">
+      </div>
+      <div class="text">
+        <div class="title">
+          <h1><span>{{ name.en }}</span><br>{{ name.zh }}</h1>
+        </div>
+        <div class="description">
+          <p>{{ description }}</p>
+          <button type="button" class="btn" @click.prevent="pageIndex = 0">開始測驗 <i class="material-icons md-24">arrow_forward</i>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+
+
+    <div class="container question" v-if="pageIndex === index"
+      v-for="(problem, index) in problems" :key="problem.id">
+      <div class="col col_question">
+        <button type="button" class="btn btn-small" @click.prevent="pageIndex -= 1"><i class="material-icons">arrow_backward</i>
+        </button>
+
+        <div class="questions_title">
+          <span>Q</span>
+          <h2>{{ problem.problem}}</h2>
+        </div>
+
+        <div class="side_title">
+          <h3>五大性格特質心理測驗<span>Big Five personality traits test</span></h3>
+        </div>
+
+
+      </div>
+
+      <div class="col col_answer">
+        <p class="pages">{{ index + 1 }} /10</p>
+        <ul class=answers>
+          <li class="answer" v-for="(option, i) in problem.options" :key="i">
+            <input type="radio" 
+            :id="problem.id + i" :name="problem.id" :value="option.fraction">
+            <label :for="problem.id + i">{{ option.description }}</label>
+          </li>
+        </ul>
+        <button type="button" class="btn btn-long" @click.prevent="pageIndex += 1">下一題 <i class="material-icons md-24">arrow_forward</i>
+        </button>
+      </div>
+
+    </div>
+
+
+    <div class="container index result" v-if="pageIndex===10">
+      <div class="image">
+
+        <div class="side_title">
+          <h3>五大性格特質心理測驗<span>Big Five personality traits test</span></h3>
+
+        </div>
+      </div>
+
+      <ul class="trait_items">
+        <li class="trait_item"><a class="active" href="#">經驗開放性</a></li>
+        <li class="trait_item"><a href="#">盡責性</a></li>
+        <li class="trait_item"><a href="#">外向性</a></li>
+        <li class="trait_item"><a href="#">親和性</a></li>
+        <li class="trait_item"><a href="#">情緒不穩定性</a></li>
+      </ul>
+
+      <div class="trait">
+
+        <div class="trait_type">
+          
+            <h3>情緒不穩定性<span>Neuroticism</span></h3>
+          
+
+          <div class="trait_description">
+            <p>情緒不穩定性是指在調整情緒時，冒出極端消極情緒的情像與不穩定性。不穩定性高的人在面臨高壓環境時，容易有憤怒、焦慮的消情緒湧上；不穩定性低的人則較能心平氣和面對、不太會情緒化反應。</p>
+          </div>
+
+        </div>
+
+        <div class="result_description">
+
+          <span>高 <br> </span>
+          
+          
+
+          <p>情緒不穩定性較高的你，是不是在面對不預期、碰到對自己不友善的狀況時，會覺得喉嚨有股氣憋著、呼吸急促、情緒高漲，久久不能平復呢？先深呼吸、喝杯水，給自己一些喘息的空間再去對付這些狀況吧。
+          </p>
+
+          <button type="button" class="btn">Next 外向性 <i class="material-icons">arrow_forward</i>
+          </button>
+
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
