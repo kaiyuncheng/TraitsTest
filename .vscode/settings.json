@@ -7,11 +7,11 @@
       "savePath": "/style"
     },
 
-    { 
-      "format": "compressed",
-      "extensionName": ".min.css",
-      "savePath": "/dist/style"
-    },
+    // { 
+    //   "format": "compressed",
+    //   "extensionName": ".min.css",
+    //   "savePath": "/dist/style"
+    // },
   ],
 
   "liveSassCompile.settings.excludeList": [
