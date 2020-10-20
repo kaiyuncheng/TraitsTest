@@ -47,18 +47,18 @@
       <div class="col col_answer">
         <p class="pages">{{ index + 1 }} /10</p>
         <ul class=answers>
-          <span class="alert" :class="{hide: hideAlert}">
+          <span class="alert" v-show="!hideAlert">
             必須選擇一個答案，才能到下一題喔！
           </span>
           <li class="answer" v-for="(option, i) in problem.options" :key="i">
             <input type="radio" 
-            :id="problem.id + i" :name="problem.id" :value="option.fraction" @click="checked = true; hideAlert = true">
+            :id="problem.id + i" :name="problem.id" :value="option.fraction" @click="hideAlert = true" v-model="score[problem.id]">
             <label :for="problem.id + i">{{ option.description }}</label>
           </li>
         </ul>
-        <button v-if="pageIndex != 9" type="button" class="btn btn-long" @click.prevent="nextPage()">下一題 <i class="material-icons md-24">arrow_forward</i>
+        <button v-if="pageIndex != 9" type="button" class="btn btn-long" @click.prevent="nextPage(problem.id)">下一題 <i class="material-icons md-24">arrow_forward</i>
         </button>
-        <button v-else type="button" class="btn btn-long" @click.prevent="pageIndex += 1">看結果 <i class="material-icons md-24">arrow_forward</i>
+        <button v-else type="button" class="btn btn-long" @click.prevent="nextPage(problem.id)">看結果 <i class="material-icons md-24">arrow_forward</i>
         </button>
       </div>
     </div>
@@ -68,44 +68,36 @@
 
         <div class="side_title">
           <h3>五大性格特質心理測驗<span>Big Five personality traits test</span></h3>
-
         </div>
       </div>
 
       <ul class="trait_items">
-        <li class="trait_item"><a class="active" href="#">經驗開放性</a></li>
-        <li class="trait_item"><a href="#">盡責性</a></li>
-        <li class="trait_item"><a href="#">外向性</a></li>
-        <li class="trait_item"><a href="#">親和性</a></li>
-        <li class="trait_item"><a href="#">情緒不穩定性</a></li>
+        <li v-for=" (trait, i) in problemList"  :key="i" class="trait_item">
+          <a href="#" @click.prevent="goResult(trait.problems[0].category)"> {{ trait.name }} </a>
+        </li>
       </ul>
 
-      <div class="trait">
-
+      <div class="trait" v-for=" (type, key,index) in problemList" :key="key" v-if="typeName === type.problems[1].category">
         <div class="trait_type">
-          
-            <h3>情緒不穩定性<span>Neuroticism</span></h3>
+            <h3>{{ type.name }}<span>{{ type.problems[0].category }}</span></h3>
           
 
           <div class="trait_description">
-            <p>情緒不穩定性是指在調整情緒時，冒出極端消極情緒的情像與不穩定性。不穩定性高的人在面臨高壓環境時，容易有憤怒、焦慮的消情緒湧上；不穩定性低的人則較能心平氣和面對、不太會情緒化反應。</p>
+            <p>{{ type.description.desc}}</p>
           </div>
 
         </div>
 
         <div class="result_description">
+          <span>{{ scoreTotal.grade }}: {{ score[type.problems[0].category] }}分 <br> </span>
 
-          <span>高 <br> </span>
-          
-          
+          <p> {{ scoreTotal.description }} </p>
 
-          <p>情緒不穩定性較高的你，是不是在面對不預期、碰到對自己不友善的狀況時，會覺得喉嚨有股氣憋著、呼吸急促、情緒高漲，久久不能平復呢？先深呼吸、喝杯水，給自己一些喘息的空間再去對付這些狀況吧。
-          </p>
-
-          <button type="button" class="btn">Next 外向性 <i class="material-icons">arrow_forward</i>
+          <button v-if="index === 4" type="button" class="btn" @click.prevent="reset()">重新測驗 <i class="material-icons">arrow_forward</i>
           </button>
-
-
+          
+          <button v-else type="button" class="btn" @click.prevent="goResult(types.en[index+1])">Next {{ types.zh[index+1] }} <i class="material-icons">arrow_forward</i>
+          </button>
         </div>
 
       </div>

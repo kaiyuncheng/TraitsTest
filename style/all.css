@@ -397,10 +397,6 @@ body {
   font-weight: 400;
 }
 
-.question .col_answer .answers .alert.hide {
-  display: none;
-}
-
 .question .col_answer .answers .answer {
   padding: 5px 0;
   line-height: 1.5rem;

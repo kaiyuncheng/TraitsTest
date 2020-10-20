@@ -9,9 +9,24 @@ new Vue({
 
     problems: [],
     score: {},
+    scoreTotal:{
+      grade:'',
+      description:'',
+    },
+    typeInitial: '',
+    typeName: '',
+    types: {
+      en: [
+        'neuroticism',
+        'extroversion',
+        'openness',
+        'agreeableness',
+        'conscientiousness',
+      ],
+      zh: ['情緒不穩定性', '外向性', '經驗開放性', '親和性', '盡責性'],
+    },
 
     pageIndex: -1,
-    checked: false,
     hideAlert: true,
   },
 
@@ -33,14 +48,14 @@ new Vue({
           vm.degree = res.data.degree;
           vm.traits = res.data.traits;
           vm.problemList = res.data.problemList;
-          console.log(res);
+          console.log(vm.problemList);
 
           vm.traits.en.forEach(item => {
             vm.$set(vm.score, item, 0);
-            vm.$set(vm.score, `${item}Total`, 0);
 
             vm.problemList[item].problems.forEach(question => {
               vm.problems = [...vm.problems, question];
+              vm.$set(vm.score, question.id, 0);
             });
           });
         })
@@ -50,13 +65,41 @@ new Vue({
         });
     },
 
-    nextPage() {
-      if(this.checked === true){
-        this.pageIndex += 1;
-        this.checked = false;
-      }else{
+    nextPage(id) {
+      if (this.score[id] > 0) {
+        if (this.pageIndex === 9) {
+          this.goResult(this.traits.en[4]);
+          this.pageIndex += 1;
+        } else {
+          this.pageIndex += 1;
+        }
+      } else {
         this.hideAlert = false;
       }
+    },
+
+    goResult(type) {
+      this.typeName = type;
+      this.typeInitial = type.slice(0, 1);
+      this.score[type] =
+        this.score[`${this.typeInitial}1`] + this.score[`${this.typeInitial}2`];
+
+      if (this.score[type] >= 7) {
+        this.scoreTotal.grade = '高';
+        this.scoreTotal.description = this.problemList[type].description.high;
+      } else if (this.score[type] === 6) {
+        this.scoreTotal.grade = '中';
+        this.scoreTotal.description = this.problemList[type].description.middle;
+      } else {
+        this.scoreTotal.grade = '低';
+        this.scoreTotal.description = this.problemList[type].description.low;
+      }
+    },
+
+    reset(){
+      this.pageIndex = -1;
+      this.problems = [];
+      this.getData();
     },
   },
 });
