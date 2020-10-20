@@ -73,7 +73,7 @@
 
       <ul class="trait_items">
         <li v-for=" (trait, i) in problemList"  :key="i" class="trait_item">
-          <a href="#" @click.prevent="goResult(trait.problems[0].category)"> {{ trait.name }} </a>
+          <a href="#" @click.prevent="goResult(trait.problems[0].category)" :class="{'active': typeName === trait.problems[0].category}"> {{ trait.name }} </a>
         </li>
       </ul>
 
