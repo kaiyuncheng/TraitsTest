@@ -31,40 +31,37 @@
       
     </div>
 
-
-    <div class="container question" v-if="pageIndex === index"
-      v-for="(problem, index) in problems" :key="problem.id">
+    <div class="container question" v-if="pageIndex === index" v-for="(problem, index) in problems" :key="problem.id">
       <div class="col col_question">
-        <button type="button" class="btn btn-small" @click.prevent="pageIndex -= 1"><i class="material-icons">arrow_backward</i>
+        <button type="button" class="btn btn-small" @click.prevent="pageIndex -= 1; hideAlert = true">
+          <i class="material-icons">arrow_backward</i>
         </button>
-
         <div class="questions_title">
           <span>Q</span>
           <h2>{{ problem.problem}}</h2>
         </div>
-
         <div class="side_title">
           <h3>五大性格特質心理測驗<span>Big Five personality traits test</span></h3>
         </div>
-
-
       </div>
-
       <div class="col col_answer">
         <p class="pages">{{ index + 1 }} /10</p>
         <ul class=answers>
+          <span class="alert" :class="{hide: hideAlert}">
+            必須選擇一個答案，才能到下一題喔！
+          </span>
           <li class="answer" v-for="(option, i) in problem.options" :key="i">
             <input type="radio" 
-            :id="problem.id + i" :name="problem.id" :value="option.fraction">
+            :id="problem.id + i" :name="problem.id" :value="option.fraction" @click="checked = true; hideAlert = true">
             <label :for="problem.id + i">{{ option.description }}</label>
           </li>
         </ul>
-        <button type="button" class="btn btn-long" @click.prevent="pageIndex += 1">下一題 <i class="material-icons md-24">arrow_forward</i>
+        <button v-if="pageIndex != 9" type="button" class="btn btn-long" @click.prevent="nextPage()">下一題 <i class="material-icons md-24">arrow_forward</i>
+        </button>
+        <button v-else type="button" class="btn btn-long" @click.prevent="pageIndex += 1">看結果 <i class="material-icons md-24">arrow_forward</i>
         </button>
       </div>
-
     </div>
-
 
     <div class="container index result" v-if="pageIndex===10">
       <div class="image">
@@ -115,9 +112,6 @@
     </div>
 
   </div>
-
-
-
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

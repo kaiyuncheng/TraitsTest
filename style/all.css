@@ -389,6 +389,18 @@ body {
   padding: 0 74px 32px;
 }
 
+.question .col_answer .answers .alert {
+  display: block;
+  color: #59c6d5;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.question .col_answer .answers .alert.hide {
+  display: none;
+}
+
 .question .col_answer .answers .answer {
   padding: 5px 0;
   line-height: 1.5rem;

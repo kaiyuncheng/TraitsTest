@@ -219,11 +219,24 @@ body {
       }
     }
 
+    
+
     .answers {
       height: auto;
       align-self: flex-start;
       padding: 0 74px 32px;
 
+      .alert {
+        display: block;
+        color: $color-primary;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        font-weight: 400;
+        &.hide {
+          display: none;
+        }
+      }
+      
       .answer {
         padding: 5px 0;
         line-height: 1.5rem;

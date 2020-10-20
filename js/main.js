@@ -11,7 +11,8 @@ new Vue({
     score: {},
 
     pageIndex: -1,
-    
+    checked: false,
+    hideAlert: true,
   },
 
   created() {
@@ -39,15 +40,23 @@ new Vue({
             vm.$set(vm.score, `${item}Total`, 0);
 
             vm.problemList[item].problems.forEach(question => {
-              vm.problems = [...vm.problems, question]
+              vm.problems = [...vm.problems, question];
             });
           });
-
         })
 
         .catch(function (err) {
           console.log('錯誤', err);
         });
+    },
+
+    nextPage() {
+      if(this.checked === true){
+        this.pageIndex += 1;
+        this.checked = false;
+      }else{
+        this.hideAlert = false;
+      }
     },
   },
 });
