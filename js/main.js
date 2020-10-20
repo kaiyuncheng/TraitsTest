@@ -65,6 +65,10 @@ new Vue({
         });
     },
 
+    scrollToTop() {
+      window.scrollTo(0,0);
+    },
+
     nextPage(id) {
       if (this.score[id] > 0) {
         if (this.pageIndex === 9) {
@@ -76,6 +80,7 @@ new Vue({
       } else {
         this.hideAlert = false;
       }
+      this.scrollToTop();
     },
 
     goResult(type) {
