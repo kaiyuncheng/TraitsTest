@@ -84,6 +84,7 @@ new Vue({
     },
 
     goResult(type) {
+      this.scrollToTop();
       this.typeName = type;
       this.typeInitial = type.slice(0, 1);
       this.score[type] =

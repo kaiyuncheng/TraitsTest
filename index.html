@@ -24,7 +24,8 @@
         </div>
         <div class="description">
           <p>{{ description }}</p>
-          <button type="button" class="btn" @click.prevent="pageIndex = 0">開始測驗 <i class="material-icons md-24">arrow_forward</i>
+          
+          <button type="button" class="btn" @click.prevent="pageIndex = 0; scrollToTop()">開始測驗 <i class="material-icons md-24">arrow_forward</i>
           </button>
         </div>
       </div>

@@ -23,6 +23,9 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  @include media-768 {
+    height: auto;
+  }
 }
 
 // button //
@@ -78,6 +81,9 @@ body {
     height: 250px;
     background: url(../img/001.jpg) 0px -40px no-repeat;
     background-size: 100%;
+    @include media-768 {
+      height: 150px;
+    }
   }
 
   .text{
@@ -87,7 +93,7 @@ body {
     justify-content: space-between;
 
     @include media-768 {
-      padding: 64px 32px;
+      padding: 32px;
       align-items: center;
     }
 
